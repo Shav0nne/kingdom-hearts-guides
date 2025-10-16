@@ -1,3 +1,4 @@
 <x-layout>
-    <h1>Hello From The Guide Page</h1>
+    <h1>{{ $guide->title }}</h1>
+    <p>{{ $guide->content }}</p>
 </x-layout>
