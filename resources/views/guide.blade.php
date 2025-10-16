@@ -1,4 +1,5 @@
 <x-layout>
-    <h1>{{ $guide->title }}</h1>
-    <p>{{ $guide->content }}</p>
+    <x-slot:heading> Guide Page {{$guide->title}}</x-slot:heading>
+    <p>{{ $guide->description }}</p>
+    <p>Category: {{ $guide->category->name }}</p>
 </x-layout>

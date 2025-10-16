@@ -3,5 +3,6 @@
     <p>{{$guide->title}}</p>
     <p>{{$guide->description}}</p>
     <p>{{$guide->difficulty}}</p>
-    <p>{{$guide->category_id}}</p>
+
+{{--    <a href="{{ route ('guide.show', $guide->id) }}">details</a>--}}
 </x-app-layout>

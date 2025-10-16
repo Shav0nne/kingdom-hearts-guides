@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\GuideController;
 use Illuminate\Support\Facades\Route;
-use App\Models\guide;
+use App\Models\Guides;
 
 Route::get('/', function () {
-    return view('home');
+    return view('home', [
+        'greeting' => 'Nyo ho'
+    ]);
 });
 
 Route::get('/about', function () {
@@ -16,7 +18,9 @@ Route::get('/contact', function () {
     return view ('contact');
 });
 
-Route::get('/guide/show', [GuideController::class, 'show']);
+Route::get('/guides/create', [GuideController::class, 'create'])->name('guides.create');
+Route::post('/guides', [GuideController::class, 'store'])->name('guides.store');
+Route::get('/guides/{guide}', [GuideController::class, 'show'])->name('guides.show');
 
 Route::get('/login', function () {
     return view ('auth.login');
