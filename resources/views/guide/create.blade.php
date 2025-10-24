@@ -13,17 +13,24 @@
 
         <div>
             <label for="description" class="block font-semibold text-white">Description</label>
-            <input type="text" name="description" id="description" value="{{ old('description') }}" class="border border-gray-300 rounded p-2 w-full">
+            <textarea name="description" id="description" class="border border-gray-300 rounded p-2 w-full">{{ old('description') }}</textarea>
             @error('description')
-            <div class="alert alert-danger>{{ $message }}</div>
+            <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
-          <div>
+        <div>
             <label for="difficulty" class="block font-semibold text-white">Difficulty</label>
-            <input type="text" name="difficulty" id="difficulty" value="{{ old('difficulty') }}" class="border border-gray-300 rounded p-2 w-full">
+            <select name="difficulty" id="difficulty" class="border border-gray-300 rounded p-2 w-full">
+                <option value="">Select difficulty</option>
+                <option value="⭐" {{ old('difficulty') == '⭐' ? 'selected' : '' }}>⭐</option>
+                <option value="⭐⭐" {{ old('difficulty') == '⭐⭐' ? 'selected' : '' }}>⭐⭐</option>
+                <option value="⭐⭐⭐" {{ old('difficulty') == '⭐⭐⭐' ? 'selected' : '' }}>⭐⭐⭐</option>
+                <option value="⭐⭐⭐⭐" {{ old('difficulty') == '⭐⭐⭐⭐' ? 'selected' : '' }}>⭐⭐⭐⭐</option>
+                <option value="⭐⭐⭐⭐⭐" {{ old('difficulty') == '⭐⭐⭐⭐⭐' ? 'selected' : '' }}>⭐⭐⭐⭐⭐</option>
+            </select>
             @error('difficulty')
-            <div class="alert alert-danger>{{ $message }}</div>
+            <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
@@ -32,7 +39,7 @@
             <select name="category_id" id="category_id" class="border border-gray-300 rounded p-2 w-full">
                 <option value="">Select a category</option>
                 @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ old('category_id') === $category->id }}>{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                 @endforeach
             </select>
             @error('category_id')
@@ -40,6 +47,6 @@
             @enderror
         </div>
 
-        <button type="submit" class="text-white">Create</button>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Create</button>
     </form>
 </x-app-layout>

@@ -18,10 +18,10 @@ Route::get('/contact', function () {
     return view ('contact');
 });
 
+Route::get('/guides', [GuideController::class, 'index'])->name('guides.index');
 Route::get('/guides/create', [GuideController::class, 'create'])->name('guides.create');
 Route::post('/guides', [GuideController::class, 'store'])->name('guides.store');
 Route::get('/guides/{guide}', [GuideController::class, 'show'])->name('guides.show');
-
 Route::get('/login', function () {
     return view ('auth.login');
 });
