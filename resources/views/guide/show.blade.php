@@ -1,14 +1,12 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8">
-        <a href="{{ route('guides.index') }}" class="inline-block mb-4 text-blue-500 hover:text-blue-700">
-            &larr; Back to all guides
-        </a>
+        <a href="{{ route('guides.index') }}" class="inline-block mb-4 text-blue-500 hover:text-blue-700">&larr; Back to all guides</a>
 
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="bg-white rounded-lg p-6">
             <h1 class="text-3xl font-bold mb-4">{{ $guide->title }}</h1>
 
             <div class="mb-4">
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold ">
                     Difficulty: {{ $guide->difficulty }}
                 </span>
                 @if($guide->category)

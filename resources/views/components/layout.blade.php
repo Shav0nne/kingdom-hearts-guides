@@ -34,7 +34,7 @@
         <h1 class="text-2xl font-bold text-khLightBlue tracking-wide">Tips & Guides</h1>
         <div class="flex space-x-6">
             <x-nav-link href="/" class="hover:text-khGold transition">Home</x-nav-link>
-            <x-nav-link href="/guide" class="hover:text-khGold transition">Guide</x-nav-link>
+            <x-nav-link href="/guides" class="hover:text-khGold transition">Guide</x-nav-link>
             <x-nav-link href="/about" class="hover:text-khGold transition">About</x-nav-link>
             <x-nav-link href="/contact" class="hover:text-khGold transition">Contact</x-nav-link>
             <x-nav-link href="{{ route('login') }}" class="hover:text-khGold transition">Log In</x-nav-link>
