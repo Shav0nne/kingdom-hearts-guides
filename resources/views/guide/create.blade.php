@@ -3,11 +3,9 @@
         @csrf
         <div>
             <label for="title" class="block font-semibold text-white">Title</label>
-            <input type="text" name="title" id="title"
-                   value="{{ old('title') }}"
-                   class="border border-gray-300 rounded p-2 w-full">
+            <input type="text" name="title" id="title" value="{{ old('title') }}" class="border border-gray-300 rounded p-2 w-full">
             @error('title')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="text-red-500">{{ $message }}</div>
             @enderror
         </div>
 
@@ -15,7 +13,7 @@
             <label for="description" class="block font-semibold text-white">Description</label>
             <textarea name="description" id="description" class="border border-gray-300 rounded p-2 w-full">{{ old('description') }}</textarea>
             @error('description')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="text-red-500">{{ $message }}</div>
             @enderror
         </div>
 
@@ -30,7 +28,7 @@
                 <option value="⭐⭐⭐⭐⭐" {{ old('difficulty') == '⭐⭐⭐⭐⭐' ? 'selected' : '' }}>⭐⭐⭐⭐⭐</option>
             </select>
             @error('difficulty')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="text-red-500">{{ $message }}</div>
             @enderror
         </div>
 
@@ -43,10 +41,10 @@
                 @endforeach
             </select>
             @error('category_id')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="text-red-500">{{ $message }}</div>
             @enderror
         </div>
 
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Create</button>
+        <x-button type="submit" class="bg-blue-500">Create Guide</x-button>
     </form>
 </x-app-layout>

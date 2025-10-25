@@ -22,6 +22,9 @@ Route::get('/guides', [GuideController::class, 'index'])->name('guides.index');
 Route::get('/guides/create', [GuideController::class, 'create'])->name('guides.create');
 Route::post('/guides', [GuideController::class, 'store'])->name('guides.store');
 Route::get('/guides/{guide}', [GuideController::class, 'show'])->name('guides.show');
+Route::get('/guides/{guide}/edit', [GuideController::class, 'edit'])->name('guides.edit');
+Route::put('/guides/{guide}', [GuideController::class, 'update'])->name('guides.update');
+Route::delete('/guides/{guide}', [GuideController::class, 'destroy'])->name('guides.destroy');
 
 Route::get('/login', function () {
     return view ('auth.login');
