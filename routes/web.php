@@ -26,6 +26,9 @@ Route::get('/guides/{guide}/edit', [GuideController::class, 'edit'])->name('guid
 Route::put('/guides/{guide}', [GuideController::class, 'update'])->name('guides.update');
 Route::delete('/guides/{guide}', [GuideController::class, 'destroy'])->name('guides.destroy');
 
+Route::middleware(['auth'])->group(function () {Route::patch('/guides/{guide}/toggle',
+    [GuideController::class, 'toggle'])->name('guides.toggle');});
+
 Route::get('/login', function () {
     return view ('auth.login');
 });

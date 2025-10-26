@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kingdom Hearts Tips & Guide</title>
+    <title>Kingdom Hearts II Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -34,7 +34,7 @@
         <h1 class="text-2xl font-bold text-khLightBlue tracking-wide">Tips & Guides</h1>
         <div class="flex space-x-6">
             <x-nav-link href="/" class="hover:text-khGold transition">Home</x-nav-link>
-            <x-nav-link href="/guides" class="hover:text-khGold transition">Guide</x-nav-link>
+            <x-nav-link href="/guides" class="hover:text-khGold transition">Guides</x-nav-link>
             <x-nav-link href="/about" class="hover:text-khGold transition">About</x-nav-link>
             <x-nav-link href="/contact" class="hover:text-khGold transition">Contact</x-nav-link>
             <x-nav-link href="{{ route('login') }}" class="hover:text-khGold transition">Log In</x-nav-link>
@@ -60,7 +60,7 @@
 </main>
 
 <footer class="mt-16 text-center text-sm text-gray-400 pb-6">
-    © 2025 Kingdom Hearts Tips & Guide
+    © 2025 Kingdom Hearts II Guides
 </footer>
 </body>
 </html>

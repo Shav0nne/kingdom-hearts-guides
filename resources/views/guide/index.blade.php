@@ -1,6 +1,22 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-8">All Guides</h1>
+        <h1 class="text-3xl font-bold mb-8 text-white">All Guides</h1>
+
+        <x-search-bar :categories="$categories"/>
+
+        @if(request()->hasAny(['search', 'difficulty', 'category_id']))
+            <div class="mb-4 text-gray-600">Gevonden: {{ $guides->total() }} resultaten</div>
+        @endif
+
+        @auth
+            @if(auth()->user()->is_admin)
+                <form action="{{ route('guides.toggle', $guide->id) }}" method="POST" class="inline">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit" class="px-4 py-2 rounded text-white no-underline hover:opacity-90  {{ $guide->active ? 'bg-green-500' : 'bg-red-500' }}">{{ $guide->active ? 'Active' : 'Inactive' }}</button>
+                </form>
+            @endif
+        @endauth
 
         <div class="mb-5">
             <x-button href="{{ route('guides.create') }}" class="bg-green-500">Create New Guide</x-button>
@@ -16,6 +32,19 @@
                     <div class="flex gap-2">
                         <x-button href="{{ route('guides.show', $guide->id) }}" class="bg-blue-500">View Details</x-button>
                         <x-button href="{{ route('guides.edit', $guide->id) }}" class="bg-yellow-500">Edit</x-button>
+
+{{--                        @auth--}}
+{{--                            @if(auth()->user()->is_admin)--}}
+{{--                                <form action="{{ route('guides.toggle', $guide->id) }}" method="POST" class="inline">--}}
+{{--                                    @csrf--}}
+{{--                                    @method('PATCH')--}}
+{{--                                    <button type="submit" class="px-4 py-2 rounded text-white no-underline hover:opacity-90 {{ $guide->active ? 'bg-green-500' : 'bg-red-500' }}">--}}
+{{--                                        {{ $guide->active ? 'Active' : 'Inactive' }}--}}
+{{--                                    </button>--}}
+{{--                                </form>--}}
+{{--                            @endif--}}
+{{--                        @endauth--}}
+
                         <form action="{{ route('guides.destroy', $guide->id) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')

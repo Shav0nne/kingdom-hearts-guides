@@ -42,7 +42,7 @@
                 @endforeach
             </select>
             @error('category_id')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="text-red-500">{{ $message }}</div>
             @enderror
         </div>
 
