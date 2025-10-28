@@ -11,16 +11,21 @@
             theme: {
                 extend: {
                     colors: {
-                        khBlue: '#1e3a8a',
-                        khLightBlue: '#60a5fa',
-                        khDark: '#0f172a',
-                        khGold: '#facc15',
+                        khOcean: '#4da6ff',
+                        khSky: '#87ceeb',
+                        khSand: '#ffe9b6',
+                        khGold: '#ffcc33',
+                        khDark: '#0b132b',
+                        khLight: '#f0f8ff',
                     },
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
                     },
                     backgroundImage: {
-                        'stars': "radial-gradient(circle at 50% 20%, rgba(255,255,255,0.15), transparent 70%), linear-gradient(to bottom, #1e3a8a, #0f172a)",
+                        ocean: "linear-gradient(180deg, #4da6ff 100%, #001f3f 100%)",
+                    },
+                    boxShadow: {
+                        glow: '0 0 15px rgba(255, 204, 51, 0.6)',
                     }
                 }
             }
@@ -28,39 +33,38 @@
     </script>
 </head>
 
-<body class="h-full min-h-screen bg-stars text-white font-sans">
-<nav class="bg-khDark bg-opacity-70 backdrop-blur-md border-b border-khLightBlue shadow-md sticky top-0 z-50">
+<body class="h-full min-h-screen bg-ocean text-khLight font-sans">
+<nav class="bg-khDark bg-opacity-70 backdrop-blur-md border-b border-khSky shadow-glow sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <h1 class="text-2xl font-bold text-khLightBlue tracking-wide">Tips & Guides</h1>
+        <h1 class="text-2xl font-bold text-khGold tracking-widest drop-shadow-md">Kingdom Hearts II Guides</h1>
         <div class="flex space-x-6">
-            <x-nav-link href="/" class="hover:text-khGold transition">Home</x-nav-link>
-            <x-nav-link href="/guides" class="hover:text-khGold transition">Guides</x-nav-link>
-            <x-nav-link href="/about" class="hover:text-khGold transition">About</x-nav-link>
-            <x-nav-link href="/contact" class="hover:text-khGold transition">Contact</x-nav-link>
-            <x-nav-link href="{{ route('login') }}" class="hover:text-khGold transition">Log In</x-nav-link>
-            <x-nav-link href="{{ route('register') }}" class="hover:text-khGold transition">Register</x-nav-link>
+            <x-nav-link href="/">Home</x-nav-link>
+            <x-nav-link href="/guides">Guides</x-nav-link>
+            <x-nav-link href="/about">About</x-nav-link>
+            <x-nav-link href="/contact">Contact</x-nav-link>
+            <x-nav-link href="{{ route('login') }}">Log In</x-nav-link>
+            <x-nav-link href="{{ route('register') }}">Register</x-nav-link>
+            <x-nav-link href="{{ route('logout') }}">Log Out</x-nav-link>
         </div>
     </div>
 </nav>
 
 <main class="max-w-5xl mx-auto mt-10 px-6">
-
     @isset($heading)
         <div class="mb-8 text-center">
-            <h2 class="text-4xl font-bold text-khLightBlue tracking-wider drop-shadow-md">
-                {{ $heading }}
-            </h2>
-            <div class="mt-2 h-1 w-24 bg-khGold mx-auto rounded-full"></div>
+            <h2 class="text-4xl font-bold text-khSky tracking-wider drop-shadow-md">{{ $heading }}</h2>
+            <div class="mt-2 h-1 w-24 bg-khGold mx-auto rounded-full shadow-glow"></div>
         </div>
     @endisset
 
-    <div class="bg-khDark bg-opacity-70 rounded-2xl shadow-lg p-8 border border-khBlue">
+    <div class="bg-khDark bg-opacity-60 rounded-2xl shadow-lg p-8 border border-khSky backdrop-blur-sm">
         {{ $slot }}
     </div>
 </main>
 
-<footer class="mt-16 text-center text-sm text-gray-400 pb-6">
+<footer class="mt-16 text-center text-sm text-khLight/70 pb-6">
     © 2025 Kingdom Hearts II Guides
 </footer>
 </body>
+
 </html>

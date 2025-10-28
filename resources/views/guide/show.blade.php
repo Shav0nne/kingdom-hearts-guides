@@ -1,8 +1,8 @@
-<x-app-layout>
+<x-layout>
     <div class="container mx-auto px-4 py-8">
-        <x-button href="{{ route('guides.index') }}" class="bg-gray-500 mb-4">&larr; Back to all guides</x-button>
+        <x-button href="{{ route('guides.index') }}" class="bg-blue-200 mb-4">&larr; Back to all guides</x-button>
 
-        <div class="bg-white rounded-lg p-6">
+        <div class="rounded-lg p-6">
             <h1 class="text-3xl font-bold mb-4">{{ $guide->title }}</h1>
 
             <div class="mb-4">
@@ -15,7 +15,7 @@
             </div>
 
             <div class="prose max-w-none">
-                <p class="text-gray-700 leading-relaxed">{{ $guide->description }}</p>
+                <p class="text-white leading-relaxed">{{ $guide->description }}</p>
             </div>
 
             <div class="mt-6 pt-6 border-t border-gray-200">
@@ -26,14 +26,6 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-layout>
 
-
-{{--<x-app-layout>--}}
-{{--    <h2>Details from ...</h2>--}}
-{{--    <p>{{$guide->title}}</p>--}}
-{{--    <p>{{$guide->description}}</p>--}}
-{{--    <p>{{$guide->difficulty}}</p>--}}
-{{--    <a href="{{ route ('guide.show', $guide->id) }}">details</a>--}}
-{{--</x-app-layout>--}}
 

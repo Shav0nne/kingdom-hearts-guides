@@ -7,7 +7,7 @@
         </div>
 
         <div class="filter-select">
-            <select name="difficulty" id="difficulty">
+            <select name="difficulty" id="difficulty" class="text-black">
                 <option value="">All Difficulties</option>
                 <option value="⭐" {{ request('difficulty') == '⭐' ? 'selected' : '' }}>⭐</option>
                 <option value="⭐⭐" {{ request('difficulty') == '⭐⭐' ? 'selected' : '' }}>⭐⭐</option>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="filter-select">
-            <select name="category_id" id="category_id">
+            <select name="category_id" id="category_id" class="text-black">
                 <option value="">All Categories</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>

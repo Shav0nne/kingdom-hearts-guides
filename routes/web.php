@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\GuideController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Guides;
 
@@ -28,6 +30,11 @@ Route::delete('/guides/{guide}', [GuideController::class, 'destroy'])->name('gui
 
 Route::middleware(['auth'])->group(function () {Route::patch('/guides/{guide}/toggle',
     [GuideController::class, 'toggle'])->name('guides.toggle');});
+
+Route::get('/register', [RegisteredUserController::class, 'create']);
+Route::post('/register', [RegisteredUserController::class, 'store']);
+
+Route::get('/login', [LoginController::class, 'create']);
 
 Route::get('/login', function () {
     return view ('auth.login');
