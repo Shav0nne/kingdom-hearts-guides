@@ -22,7 +22,7 @@
                         sans: ['Poppins', 'sans-serif'],
                     },
                     backgroundImage: {
-                        ocean: "linear-gradient(180deg, #4da6ff 100%, #001f3f 100%)",
+                        ocean: "linear-gradient(180deg, #4da6ff 100%, #001f3f 50%)",
                     },
                     boxShadow: {
                         glow: '0 0 15px rgba(255, 204, 51, 0.6)',
@@ -37,14 +37,38 @@
 <nav class="bg-khDark bg-opacity-70 backdrop-blur-md border-b border-khSky shadow-glow sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <h1 class="text-2xl font-bold text-khGold tracking-widest drop-shadow-md">Kingdom Hearts II Guides</h1>
-        <div class="flex space-x-6">
+        <div class="flex space-x-6 items-center">
             <x-nav-link href="/">Home</x-nav-link>
             <x-nav-link href="/guides">Guides</x-nav-link>
             <x-nav-link href="/about">About</x-nav-link>
             <x-nav-link href="/contact">Contact</x-nav-link>
-            <x-nav-link href="{{ route('login') }}">Log In</x-nav-link>
-            <x-nav-link href="{{ route('register') }}">Register</x-nav-link>
-            <x-nav-link href="{{ route('logout') }}">Log Out</x-nav-link>
+
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <x-nav-link href="/dashboard">Dashboard</x-nav-link>
+                    <x-nav-link href="{{ route('guides.create') }}">Create Guide</x-nav-link>
+                @endif
+                <form method="POST" action="{{ route('logout') }}" class="inline">
+                    @csrf
+                    <button type="submit" class="inline-block px-4 py-2 rounded text-white no-underline hover:opacity-90 transition-opacity hover:text-khGold transition">
+                        Log Out
+                    </button>
+                </form>
+            @else
+                <x-nav-link href="{{ route('login') }}">Log In</x-nav-link>
+                <x-nav-link href="{{ route('register') }}">Register</x-nav-link>
+            @endauth
+
+
+{{--            @guest--}}
+{{--            <x-nav-link href="/login" :active="request()->is('login')">Log In</x-nav-link>--}}
+{{--                <x-nav-link href="/register" :active="request()->is('register')">register</x-nav-link>--}}
+{{--            @endguest--}}
+{{--            @auth--}}
+{{--                <form method="POST" action="/logout"></form>--}}
+{{--            @csrf--}}
+{{--                <x-nav-link>log out</x-nav-link>--}}
+{{--                @endauth--}}
         </div>
     </div>
 </nav>
@@ -66,5 +90,4 @@
     © 2025 Kingdom Hearts II Guides
 </footer>
 </body>
-
 </html>

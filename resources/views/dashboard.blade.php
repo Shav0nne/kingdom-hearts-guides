@@ -1,65 +1,43 @@
 <x-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+    <div class="max-w-4xl mx-auto px-6 py-8">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-bold text-khSky mb-4">Dashboard</h1>
+            <p class="text-khLight/80">Welcome back, {{ Auth::user()->name }}!</p>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
+            @if(Auth::user()->is_admin)
+                <span class="inline-block bg-khGold text-khDark px-3 py-1 rounded-full text-sm font-bold mt-2">Administrator</span>
+            @endif
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-khDark/60 rounded-2xl p-6 border border-khSky/30">
+                <h2 class="text-xl font-bold text-khGold mb-4">Quick Actions</h2>
+                <div class="space-y-3">
+                    <x-button href="{{ route('guides.create') }}" class="bg-khGold hover:bg-yellow-400 text-khDark w-full justify-center">
+                        Create New Guide
+                    </x-button>
+                    <x-button href="{{ route('guides.index') }}" class="bg-khSky hover:bg-blue-400 text-white w-full justify-center">
+                        View All Guides
+                    </x-button>
+                </div>
+            </div>
+
+            <div class="bg-khDark/60 rounded-2xl p-6 border border-khSky/30">
+                <h2 class="text-xl font-bold text-khGold mb-4">Account Information</h2>
+                <div class="space-y-2 text-khLight/80">
+                    <p><strong>Name:</strong> {{ Auth::user()->name }}</p>
+                    <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+                    <p><strong>Role:</strong> {{ Auth::user()->is_admin ? 'Administrator' : 'User' }}</p>
+                    <p><strong>Member since:</strong> {{ Auth::user()->created_at->format('M d, Y') }}</p>
+                </div>
+
+                <div class="mt-6">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg w-full transition-colors duration-200">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-            @auth
-                @if(auth()->user()->is_admin)
-                    <form action="{{ route('guides.toggle', $guide->id) }}" method="POST" class="inline">
-                        @csrf
-                        @method('PATCH')
-                        <button type="submit" class="px-4 py-2 rounded text-black no-underline hover:opacity-90  {{ $guide->active ? 'bg-green-500' : 'bg-red-500' }}">{{ $guide->active ? 'Active' : 'Inactive' }}</button>
-                    </form>
-                @endif
-            @endauth
-
-            <div class="mb-5">
-                <x-button href="{{ route('guides.create') }}" class="bg-green-500">Create New Guide</x-button>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach($guides as $guide)
-                    <div class="bg-white rounded-lg shadow-md p-6">
-                        <h2 class="text-xl text-black mb-2">{{ $guide->title }}</h2>
-                        <p class="text-gray-600 mb-4 line-clamp-3">{{ Str::limit($guide->description) }}</p>
-                        <p class="text-sm text-gray-500 mb-4">Difficulty: {{ $guide->difficulty }}</p>
-
-                        <div class="flex gap-2">
-                            <x-button href="{{ route('guides.show', $guide->id) }}" class="bg-blue-500">Details</x-button>
-                            <x-button href="{{ route('guides.edit', $guide->id) }}" class="bg-yellow-500">Edit</x-button>
-
-                            @auth
-                                @if(auth()->user()->is_admin)
-                                    <form action="{{ route('guides.toggle', $guide->id) }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit" class="px-4 py-2 rounded text-white no-underline hover:opacity-90 {{ $guide->active ? 'bg-green-500' : 'bg-red-500' }}">
-                                            {{ $guide->active ? 'Active' : 'Inactive' }}
-                                        </button>
-                                    </form>
-                                @endif
-                            @endauth
-
-                            <form action="{{ route('guides.destroy', $guide->id) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <x-button type="submit" class="bg-red-500"
-                                          onclick="return confirm('Are you sure you want to delete this guide?')">Delete</x-button>
-                            </form>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
 </x-layout>
