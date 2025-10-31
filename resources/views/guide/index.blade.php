@@ -20,7 +20,7 @@
         @auth
             @if(auth()->user()->is_admin)
                 <div class="text-center mb-10">
-                    <x-button href="{{ route('guides.create') }}" class="bg-khGold hover:bg-yellow-400 text-khDark font-bold px-8 py-3 rounded-lg shadow-glow transition-all duration-300">
+                    <x-button href="{{ route('guides.create') }}" class="bg-khGold hover:bg-yellow-500 text-khDark font-bold px-8 py-3 rounded-lg transition-all">
                         Create New Guide
                     </x-button>
                 </div>
@@ -30,6 +30,12 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($guides as $guide)
                 <div class="bg-khDark/60 backdrop-blur-sm rounded-2xl shadow-lg border border-khSky/30 p-6 hover:shadow-glow hover:border-khGold/50 transition-all duration-300">
+                    <div class="mb-4 rounded-lg overflow-hidden h-48 bg-khDark/80">
+                        <img src="{{ $guide->image_url ?? 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/kingdom-hearts-ii/7/76/468px-KH_2.5_HD_Remix_Logo.jpg' }}"
+                             alt="{{ $guide->title }}"
+                             class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                    </div>
+
                     <div class="mb-4">
                         <h2 class="text-xl font-bold text-khGold mb-3 line-clamp-2 leading-tight">{{ $guide->title }}</h2>
                         @if($guide->category)
@@ -61,33 +67,38 @@
                         @endif
                     @endauth
 
-                    <div class="flex gap-2 pt-4 border-t border-khSky/20">
-                        <x-button href="{{ route('guides.show', $guide->id) }}" class="bg-khSky hover:bg-blue-400 text-white flex-1 justify-center text-sm">
-                            Details
-                        </x-button>
+                    <div class="pt-4 border-t border-khSky/20">
+                        <div class="grid grid-cols-2 gap-2 mb-2">
+                            <x-button href="{{ route('guides.show', $guide->id) }}" class="bg-khSky hover:bg-blue-400 text-white justify-center text-center py-2">Details</x-button>
+
+                            @auth
+                                @if(auth()->user()->is_admin)
+                                    <x-button href="{{ route('guides.edit', $guide->id) }}" class="bg-khGold hover:bg-yellow-400 text-khDark justify-center text-center text-sm py-2">Edit</x-button>
+                                @else
+                                    <div></div>
+                                @endif
+                            @endauth
+                        </div>
 
                         @auth
                             @if(auth()->user()->is_admin)
-                                <x-button href="{{ route('guides.edit', $guide->id) }}" class="bg-khGold hover:bg-yellow-400 text-khDark flex-1 justify-center text-sm">
-                                    Edit
-                                </x-button>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <form action="{{ route('guides.toggle', $guide->id) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <x-button type="submit" class="w-full px-4 py-2 text-white no-underline hover:opacity-90 transition-opacity duration-200 font-medium text-sm {{ $guide->active ? 'bg-green-600 hover:bg-green-500' : 'bg-red-600 hover:bg-red-500' }}">
+                                            {{ $guide->active ? 'Publish' : 'Unpublish' }}
+                                        </x-button>
+                                    </form>
 
-                                <form action="{{ route('guides.toggle', $guide->id) }}" method="POST" class="flex-1">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit" class="w-full px-4 py-2 rounded-lg text-white no-underline hover:opacity-90 transition-opacity duration-200 font-medium text-sm {{ $guide->active ? 'bg-green-600 hover:bg-green-500' : 'bg-red-600 hover:bg-red-500' }}">
-                                        {{ $guide->active ? 'Publish' : 'Unpublish' }}
-                                    </button>
-                                </form>
-
-                                <form action="{{ route('guides.destroy', $guide->id) }}" method="POST" class="flex-1">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="w-full px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg justify-center text-sm transition-colors duration-200"
-                                            onclick="return confirm('Are you sure you want to delete this guide?')">
-                                        Delete
-                                    </button>
-                                </form>
+                                    <form action="{{ route('guides.destroy', $guide->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-button type="submit" class="w-full px-4 py-2 bg-red-600 hover:bg-red-500 text-white justify-center text-sm transition-colors duration-200"
+                                                onclick="return confirm('Are you sure you want to delete this guide?')">Delete
+                                        </x-button>
+                                    </form>
+                                </div>
                             @endif
                         @endauth
                     </div>

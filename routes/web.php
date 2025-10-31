@@ -15,8 +15,8 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+// Public guide routes
 Route::get('/guides', [GuideController::class, 'index'])->name('guides.index');
-Route::get('/guides/{guide}', [GuideController::class, 'show'])->name('guides.show');
 
 require __DIR__.'/auth.php';
 
@@ -31,3 +31,5 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/guides/{guide}', [GuideController::class, 'destroy'])->name('guides.destroy');
     Route::patch('/guides/{guide}/toggle', [GuideController::class, 'toggle'])->name('guides.toggle');
 });
+
+Route::get('/guides/{guide}', [GuideController::class, 'show'])->name('guides.show');
