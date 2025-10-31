@@ -14,7 +14,7 @@
         <div>
             <label for="image_url" class="block text-khGold font-semibold mb-2">Cover Image URL</label>
             <input type="url" name="image_url" id="image_url" value="{{ old('image_url') }}"
-                   class="w-full px-4 py-3 bg-khDark border border-khSky/30 rounded-lg text-khLight placeholder-khLight/50 focus:border-khGold focus:ring-2 focus:ring-khGold/20 transition-all duration-200"
+                   class="bg-white text-black w-full px-4 py-3 bg-khDark border border-khSky/30 rounded-lg text-khLight placeholder-khLight/50 focus:border-khGold focus:ring-2 focus:ring-khGold/20 transition-all duration-200"
                    placeholder="https://oyster.ignimgs.com/mediawiki/apis.ign.com/kingdom-hearts-ii/7/76/468px-KH_2.5_HD_Remix_Logo.jpg">
             <p class="text-khLight/60 text-sm mt-2">Paste a image URL from the web. Leave empty for default image.</p>
             @error('image_url')
