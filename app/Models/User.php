@@ -22,11 +22,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_admin'
+        'is_admin',
+        'can_comment',
+        'like_count'
     ];
 
     protected $casts = [
-        'is_admin' => 'boolean'
+        'is_admin' => 'boolean',
+        'can_comment' => 'boolean'
     ];
 
     /**
@@ -54,5 +57,21 @@ class User extends Authenticatable
     }
     public function isAdmin(): Boolean {
         return $this->is_admin === 1;
+    }
+
+    public function likes() {
+        return $this->hasMany(Like::class);
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function canComment() {
+        return $this->can_comment || $this->like_count >= 3;
+    }
+
+    public function hasLiked(Guide $guide) {
+        return $this->likes()->where('guide_id', $guide->id)->exists();
     }
 }
