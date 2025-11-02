@@ -30,7 +30,7 @@
             <div class="mb-8">
                 <p class="text-khLight/80 leading-relaxed whitespace-pre-line">{{ $guide->description }}</p>
             </div>
-            
+
             <div class="border-t border-khSky/20 pt-6 mb-6">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-4">
@@ -44,17 +44,6 @@
                             {{ $guide->likeCount() }} likes • {{ $guide->commentCount() }} comments
                         </span>
                     </div>
-
-                    @auth
-                        @if(!auth()->user()->is_admin)
-                            <div class="text-sm text-khLight/60">
-                                Your likes: {{ auth()->user()->like_count }}
-                                @if(!auth()->user()->canComment())
-                                    <br><span class="text-khGold">Need {{ 3 - auth()->user()->like_count }} more likes to comment!</span>
-                                @endif
-                            </div>
-                        @endif
-                    @endauth
                 </div>
             </div>
 
